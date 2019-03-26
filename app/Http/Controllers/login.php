@@ -11,6 +11,7 @@ class login extends Controller
     //登录展示
     public function login(){
 
+
         return view('login/login');
     }
     //登录执行
@@ -25,12 +26,13 @@ class login extends Controller
         }
         $user_pwd=md5($user_pwd);
         $userpwd=$res->user_pwd;
-        //echo ($userpwd);exit;
+        $user_id=$res->user_id;
         if($user_pwd!==$userpwd){
             echo 3;exit;
         }
-        session('user_tel',$user_tel);
-        echo 1;exit;
+        session(['userid'=>$user_id]);
+        //echo session('userid');die;
+        echo 1;
     }
     //注册
     public function registershow(){

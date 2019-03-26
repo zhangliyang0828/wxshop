@@ -135,9 +135,12 @@
 <script src="{{url('js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('js/lazyload.min.js')}}"></script>
 <script src="{{url('js/mui.min.js')}}"></script>
+<script src="{{url('layui/layui.js')}}"></script>
 
 <script>
-   
+$(function(){
+    layui.use(['layer'],function(){
+    var layer=layui.layer;
     //分类ID
     $(document).on('click','.cateid',function(){
         var cate_id=$(this).attr('cate_id');
@@ -154,21 +157,31 @@
         });
         
     })
-    // //添加购物车
-    // $(document).on('click','.gouwu',function(){
-    //     var goods_id=$(this).attr('goods_id');
-    //     //console.log(cate_id);
-    //     $.ajax({
-    //         type:"post",
-    //         data:{goods_id:goods_id},
-    //         url:"goodsgouwu",
-    //         datatype:"json",
-    //         success:function(res){
-    //             //console.log(res);
-    //         }
-    //     });
+    //添加购物车
+    $(document).on('click','.gouwu',function(){
+        var goods_id=$(this).attr('goods_id');
+        //console.log(cate_id);
+        $.ajax({
+            type:"post",
+            data:{goods_id:goods_id},
+            url:"goodsgouwu",
+            success:function(res){
+                // // console.log(res);
+                // if(res==1){ 
+                //     layer.msg('添加成功', {icon:1});
+                // }else{
+                //     layer.msg('添加失败', {icon:2});
+                // }
+               
+            }
+        });
         
-    // })
+    })
+
+
+
+    })
+})
     
 </script>
 

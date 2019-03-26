@@ -204,10 +204,10 @@
 
 			@foreach($data as $k=>$v)
             	<li id="23558" codeid="12751965" goodsid="23558" codeperiod="28436">
-            		<a href="javascript:;" class="g-pic">
+            		<a href="/goodsadd?id={{$v->goods_id}}" class="g-pic">
 						<img src="uploads/{{$v->goods_img}}" alt=""  width="136" height="136">
             		</a>
-            		<p class="g-name">{{$v->goods_name}}</p>
+            		<a href="/goodsadd?id={{$v->goods_id}}"><p class="g-name">{{$v->goods_name}}</p></a>
             		<ins class="gray9">价值：￥{{$v->goods_price}}</ins>
             		<div class="Progress-bar">
             			<p class="u-progress">

@@ -22,12 +22,21 @@ class Index extends Controller
     }
     //购物车
     public function indexlist(){
-
-        return view('index/indexlist');
+        $userid=session('userid');
+        //echo ($userid);exit;
+        $data=DB::table("history")->where('user_id',$userid)->get();
+        foreach($data as $k=>$v){
+            $goods_id[]=$v->goods_id;
+        }
+        // $goods_id=$data->goods_id;
+        //dd($goods_id);exit;
+        $datb=DB::table("goods")->whereIn('goods_id',$goods_id)->get();
+        //dd($datb);exit;
+        return view('index/indexlist',['datb'=>$datb]);
+        //return view('index/indexlist');
     }
     //个人中心
     public function indexuser(){
-        
         return view('index/indexuser');
     }
 }

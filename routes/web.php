@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 route::any("index","Index@index");
 route::any("indexadd","Index@indexadd");
-route::any("indexlist","Index@indexlist");
-route::any("indexuser","Index@indexuser");
+route::any("indexlist","Index@indexlist")->middleware('login');
+route::any("indexuser","Index@indexuser")->middleware('login');
 
 route::any("login","login@login");
 route::any("registershow","login@registershow");
@@ -31,3 +31,8 @@ route::post("save","login@save");
 route::post("goodslist","goods@goodslist");
 route::get("goodsadd","goods@goodsadd");
 route::get("goodsgouwu","goods@goodsgouwu");
+route::get("del","goods@del");
+
+route::any("usersiteshow","user@usersiteshow");
+route::post("usersite","user@usersite");
+route::any("siteshow","user@siteshow");

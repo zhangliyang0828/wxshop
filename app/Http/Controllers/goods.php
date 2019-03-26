@@ -51,7 +51,28 @@ class goods extends Controller
     public function goodsgouwu(Request $request){
 
         $goods_id=$request->input('id');
-        //echo $goods_id;exit;
+        $user_id=session('userid');
+        if(empty($user_id)){
+            return redirect('login/login');
+        }
+        $time=time();
+        $where=[
+            'goods_id'=>$goods_id,
+            'user_id'=>$user_id,
+            'create_time'=>$time
+        ];
+        $res=DB::table('history')->insert($where);
+        if($res){
+          return redirect('indexlist');
+        }
+    }
+    //购物车删除
+    public function del(Request $request){
+        $goods_id=$request->input('id');
+        $res=DB::table('history')->where('goods_id',$goods_id)->delete();
+        if($res){
+          return redirect('indexlist');            
+        }
     }
     
 }

@@ -53,7 +53,7 @@ class goods extends Controller
         $goods_id=$request->input('id');
         $user_id=session('userid');
         if(empty($user_id)){
-            return redirect('login/login');
+            return redirect('login');
         }
         $time=time();
         $where=[

@@ -25,27 +25,7 @@
 </div>
 <div class="addr-wrapp">
 
-    <!-- <div class="addr-list">
-          <ul>
-             <li class="clearfix">
-                 <span class="fl">兰兰</span>
-                 <span class="fr">15034008459</span>
-             </li>
-             <li>
-                 <p>北京市东城区起来我来了</p>
-             </li>
-             <li class="a-set">
-                 <s class="z-set" style="margin-top: 6px;"></s>
-                 <span>设为默认</span>
-                 <div class="fr">
-                     <span class="edit">编辑</span>
-                     <span class="remove">删除</span>
-                 </div>
-             </li>
-         </ul>  
-    </div> -->
-
-     @foreach(data as $k=>$v)
+     @foreach($data as $k=>$v)
      <div class="addr-list">
           <ul>
              <li class="clearfix">
@@ -56,49 +36,34 @@
                  <p>{{$v->address_site}}</p>
              </li>
              <li class="a-set">
-                 <s class="z-defalt" style="margin-top: 6px;"></s>
+                 <s class="z-defalt" addressid="{{$v->address_id}}" style="margin-top: 6px;"></s>
                  <span>设为默认</span>
                  <div class="fr">
-                     <span class="edit">编辑</span>
-                     <span class="remove">删除</span>
+                     <span class="remove"><a href="/del?id={{$v->address_id}}">删除</a></span>
                  </div>
              </li>
          </ul>  
      </div>
      @endforeach
-</div>
 
+</div>
 
 <script src="js/zepto.js" charset="utf-8"></script>
 <script src="js/sm.js"></script>
 <script src="js/sm-extend.js"></script>
-
-
-<!-- 单选 -->
 <script>
-    
-
-     // 删除地址
-    $(document).on('click','span.remove', function () {
-        var buttons1 = [
-            {
-              text: '删除',
-              bold: true,
-              color: 'danger',
-              onClick: function() {
-                $.alert("您确定删除吗？");
+    $(".z-defalt").click(function(){
+        var id=$(this).attr('addressid');
+        // console.log(id);
+        $.ajax({
+              type:'post',
+              url:"address",
+              data:{id:id},
+              success:function(msg){
+                  console.log(msg)
               }
-            }
-          ];
-          var buttons2 = [
-            {
-              text: '取消',
-              bg: 'danger'
-            }
-          ];
-          var groups = [buttons1, buttons2];
-          $.actions(groups);
-    });
+        })
+    })
 </script>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script>

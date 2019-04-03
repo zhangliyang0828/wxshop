@@ -60,12 +60,15 @@
         var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
         if(tel==''){
     		alert('请输入手机号');
+            return false;
     	}else if(!myreg.test(tel)){
             alert('手机号不正确请重新输入');
+            return false;
         }
         var pwd=$('#txtPassword').val();
         if(pwd==''){
             alert('请输入密码');
+            return false;
         }
         $.ajax({
             type:'post',
@@ -74,11 +77,15 @@
         }).done(function(res){
             if(res==3){
                 alert('账号或密码有误');
+                return false;
             }else if(res==2){
                 alert('账号或密码有误');
+                return false;
             }else if(res==1){
                 location.href="{{url('index')}}";
+                return false;
             }
+            alert('账号或密码有误');
         })
 
     })

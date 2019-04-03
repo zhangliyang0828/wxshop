@@ -40,12 +40,12 @@
                     </li>
                     <li>
                         <dl>
-                            <input class="pwd" maxlength="11" type="text" placeholder="6-16位数字、字母组成" value="" />
+                            <input class="pwd" maxlength="11" type="password" placeholder="6-16位数字、字母组成" value="" />
                         </dl>
                     </li>
                     <li>
                         <dl>
-                            <input class="conpwd" maxlength="11" type="text" placeholder="请确认密码" value="" />
+                            <input class="conpwd" maxlength="11" type="password" placeholder="请确认密码" value="" />
                         </dl>
                     </li>
                     <li><a id="btnNext" href="javascript:void(0);" class="orangeBtn">确认</a></li>
@@ -73,8 +73,8 @@
             url:"yzm",
             data:{tel:tel},
         }).done(function(res){
-            //console.log(res);
-            if(res=1){
+            console.log(res);
+            if(res==1){
                 alert('发送成功');
             }else{
                 alert('发送失败');
@@ -84,20 +84,37 @@
     })
     //提交
     $('#btnNext').click(function(){
-    	if($('#userMobile').val()==''){
+        var tel=$('#userMobile').val();
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        var yzm=$('#yzm').val();
+        var pwd=$('.pwd').val();
+        var conpwd=$('.conpwd').val()
+    	if(tel==''){
     		alert('请输入手机号');
-    	}else if($('#yzm').val()==''){
+    	}else if(!myreg.test(tel)){
+    		alert('请输入正确手机号');
+    	}else if(yzm==''){
     		alert('请您输入验证码');
-    	}else if($('.pwd').val()==''){
+    	}else if(pwd==''){
     		alert('请输入您的密码!');
-    	}else if($('.conpwd').val()==''){
+    	}else if(conpwd==''){
     		alert('请您确认密码！');
     	}
-        var pwd1 = $('.pwd').val();
-        var pwd2 = $('.conpwd').val();
-        if(pwd1!==pwd2){
+        if(pwd!==conpwd){
             alert('您俩次输入的密码不一致哦！');
         }
+        $.ajax({
+            type:'post',
+            url:"register",
+            data:{tel:tel,yzm:yzm,pwd:pwd},
+        }).done(function(res){
+            if(res==1){
+                alert('注册成功');
+                location.href="{{url('login')}}";
+            }else{
+                alert(res);
+            };
+        })
     })
   
 

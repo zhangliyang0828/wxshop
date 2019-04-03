@@ -25,6 +25,7 @@ class Index extends Controller
         $userid=session('userid');
         //echo ($userid);exit;
         $data=DB::table("history")->where('user_id',$userid)->get();
+        //dd($data);
         foreach($data as $k=>$v){
             $goods_id[]=$v->goods_id;
         }

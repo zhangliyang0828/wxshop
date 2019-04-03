@@ -34,13 +34,33 @@ class user extends Controller
     //收货地址
     public function siteshow(){
         $id=session('userid');
-        //echo($user_id);exit;
-        $data=DB::table('address')->whereIn('user_id',$id)->get();
+        //echo($id);exit;
+        $where=[
+            'user_id'=>$id
+        ];
+        $data=DB::table("address")->where($where)->get();
+        // print_r($data);die;
         return view('user/siteshow',['data'=>$data]);
-
-        // $datb=DB::table("address")->whereIn('user_id',$id)->get();
-        // return view('index/indexlist',['datb'=>$datb]);
     }
-
+    //收货地址
+    public function del(Request $request){
+        $id=$request->id;
+        $res=DB::table('address')->where('address_id',$id)->delete();
+        if($res){
+            return redirect('siteshow'); 
+        }
+    }
+    //设置默认收货地址
+    public function address(Request $request){
+     $id=$request->id;
+     //echo ($addressid);exit;
+     $user_id=session('userid');
+     //echo ($user_id);exit;
+     $res=DB::table('address')->where('user_id',$user_id)->update(['address_status'=>'2']);
+     $arr=DB::table('address')->where('address_id',$id)->update(['address_status'=>'1']);
+     if($arr){
+         echo('修改成功');
+     }
+    }
 
 }

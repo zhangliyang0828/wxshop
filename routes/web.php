@@ -27,6 +27,9 @@ route::any("registershow","login@registershow");
 route::post("register","login@register");
 route::post("yzm","login@yzm");
 route::post("save","login@save");
+route::any("esc","login@esc");
+route::any("resetshow","login@resetshow");
+route::post("reset","login@reset");
 
 route::post("goodslist","goods@goodslist");
 route::get("goodsadd","goods@goodsadd");
@@ -36,3 +39,5 @@ route::get("del","goods@del");
 route::any("usersiteshow","user@usersiteshow");
 route::post("usersite","user@usersite");
 route::any("siteshow","user@siteshow");
+route::any("del","user@del");
+route::post("address","user@address");
